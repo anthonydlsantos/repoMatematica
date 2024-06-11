@@ -1,0 +1,100 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{titlesec}
+\usepackage{blindtext}
+\usepackage{hyperref} % Para links, en contenido. 
+\usepackage{systeme}
+\setcounter{section}{-1}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\renewcommand*\contentsname{ Contenido :} % Para la tabla de contenido
+
+\title{ {\color{blue} Lista de Ejercicios - 2do BTP} }
+\author{ Anthony de los Santos \footnote{ Los ejercicios y comentarios presentados aqu\'i son de mi responsabilidad, por cualquier
+error visto contactar  \textit{agregdelossantos@gmail.com} } }
+\date{ 2024 }
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+% --- 
+
+\vspace{20px}
+
+\section{ Sobre estas notas. }
+
+Estas notas estan pensadas para ser una guia en las clases, y tambi\'en ser\'a referencia 
+de ejercicios a realizar. 
+
+--- \\
+Estas notas, apuntes, estan en construcci\'on. Se modifica en el correr del curso. ~ ~ \textbf{ {\color{red} Ultima modificaci\'on : Lunes 10 de Junio } }
+
+--- \\
+
+
+
+\section{ Lista 01 - Conjuntos y Conteo }
+
+En esta lista de ejercicios trataremos los temas que corresponden a Operaciones de Conjuntos, t\'ecnicas de conteo e Introducci\'on a la Probabilidad.  \\
+
+\subsection*{ Ejercicio 1 - Operaciones con Conjuntos }
+\subsubsection*{ Ejercicio 1.1) }
+Tengamos un conjunto \textit{Universal} denominado $U$, de modo que $U = \{ 0,1,2,3,4,5,6,7,8,9 \}$ \\ \\
+Dado los siguientes {\color{blue} subconjuntos} de $U$,  $A = \{ 2,4,6 \} $, $B = \{1,2,3,4\} $, \\ $C = \{ 3,5,7,8,9 \}$; Realizar las siguientes operaciones: \\ \\ 
+a) $ A^c $ ~ ~ b) $ B \cap A $ ~ ~ c) $ B \cap C $ ~ ~  d) $ (A \cup C)^c$
+
+\subsubsection*{ Ejercicio 1.2) } 
+Dado el conjunto \textit{Universal} $ Z = \{  w,a,s,d,e,r,q  \}$; Se definen sus subconjuntos, $A = \{ w,a,s,d \}$ ~ ~ $B = \{ e,r \}$ ~ ~ $C = \{ q \}$; ~ Realizar las siguientes operaciones: \\ \\ 
+
+a) $ A \cup C $ ~ ~ b) = $ (C \cap B) $ ~ ~ c) $ B^c $ 
+
+
+\subsubsection*{ Ejercicios 2 - Conteo  }
+
+a) Un estudiante necesita materiales para estudiar Matem\'atica Financiera y Contabilidad. En una biblioteca se tienen 7 libros de Matem\'atica y 5 libros de contabilidad.~ ~ De cuantas formas puede elegir los libros para estudiar las asignaturas ? \\ \\
+b) Si lanzo una moneda 3 veces, cuantos resultados \\ posibles podr\'ia obtener ? Expresar estos resultados como un conjunto. \\ \\
+c) Si ahora lanzo un dado dos veces, cuantos resultados podr\'ia obtener ? \\ \\
+d) En una determinada ciudad, se utilizan 3 letras y 3 n\'umeros para la creaci\'on de matr\'iculas de automoviles. Cuantas matr\'iculas podrian formarse, con y sin repetici\'on de letras y n\'umeros ? 
+
+\subsection*{  Ejercicio 3) Contando cl\'asicos }
+
+En un determinado programa de una  estaci\'on de Radio, se desea pasar algo de Musica Cl\'asica. Para el comienzo se tienen algunos temas de Beethoven, Mozart y Schubert. \\ \\
+Para probar la idea, se planea que primero se pase un tema de Beethoven, seguido de uno de Mozart. De Beethoven se disponen 10 temas, mientras que de Mozart tenemos 26. 
+
+Una pregunta que surge es, \textit{¿ De cuantas formas podr\'ian hacer esta programaci\'on ? } \\ \\ 
+Si adem\'as se agregan 14 temas de Schubert y se plantea una programaci\'on semanal (durante los 7 d\'ias). Se quiere tener una estimaci\'on de cuantos anos pasarian hasta que se repita una programaci\'on. Esto es, hasta que se repitan los mismos temas en el d\'ia. 
+
+\subsection{ Introducci\'on a la Probabilidad elemental}
+\subsection*{Ejercicio 1) } a) Prueba \textit{experimental}. Lanzar una moneda $n$ veces y anotar cada resultado. Siendo $n = 5,10,15,20 $ ; Que podr\'ias interpretar de este experimento ? \\ \\
+b) Calcular la Probabilidad de obtener \textit{cara} al lanzar una moneda. 
+
+\subsection*{Ejercicio 2)}
+Se lanza una moneda 3 veces. C\'ual es la Probabilidad de que salga cara ? C\'ual es la Probabilidad de salga las tres veces n\'umero ? 
+\subsection*{Ejercicio 3)}
+a) Se lanza dos veces un dado. C\'ual es la probabilidad de que salgan (6,6) ? La probabibilidad de sacar un 3 y 4 sin importar su orden, esto es (3,4) o (4,3) ? \\ \\
+b) Ahora se lanza solamente una vez el dado. C\'ual es la Probabilidad de obtener un n\'umero par como resultado ?  
+\subsection*{Ejercicio 4)}
+En una ciudad se decide inspeccionar 20 cafeter\'ias y 10 bares para un proyecto de inversi\'on. La mitad de cafeter\'ias y la mitad de los bares tienen en su men\'u una opci\'on vegana. \\ \\
+Si se selecciona al azar un local para inspeccionar, determinar la Probabilidad de que \'este sea una cafeter\'ia o que presente en su men\'u una opcion vegana. 
+
+\subsection*{Ejercicio 5)}
+En cierto municipio de la ciudad, 60\% de las familias se suscriben al peri\'odico $X$, 80\% lo hacen al peri\'oico $Y$ y 50\% de todas las familias a ambos peri\'odicos. Si se elige una familia al azar, ¿cual es la probabilidad de que se suscriba por lo menos a
+uno de los dos peri\'odicos ?  
+
+\end{document}

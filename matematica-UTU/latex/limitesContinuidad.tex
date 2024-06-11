@@ -1,0 +1,587 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{titlesec}
+\usepackage{blindtext}
+\usepackage{hyperref} % Para links, en contenido. 
+\usepackage{systeme}
+\setcounter{section}{-1}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+    pdftitle={Overleaf Example},
+    pdfpagemode=FullScreen,
+    }
+
+\renewcommand*\contentsname{ Contenido :} % Para la tabla de contenido
+
+\title{ L\'imites y continuidad. }
+\author{ Anthony de los Santos \footnote{ Los ejercicios y comentarios presentados aqu\'i son de mi responsabilidad, por cualquier
+error visto contactar  \textit{agregdelossantos@gmail.com} } }
+\date{ 24/10/2023 }
+
+\begin{document}
+
+% ----------- Titulo y contenido
+
+\maketitle 
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+% ------------
+
+
+\vspace{20px}
+
+\section{ Sobre estas notas. }
+
+Estas notas estan pensadas para ser una guia en las clases, y tambi\'en ser\'a referencia 
+de ejercicios a realizar. 
+
+--- \\
+Recomiendo seguir la \textbf{referencia bibliogr\'afica} para un estudio m\'as profundo. Como tambi\'en apoyarse y utilizar herramientas computacionales para realizar gr\'aficas y c\'alculo de l\'imites. Algunos ejemplos de tales herramientas: Geogebra, matem\'atica con Python, Octave, etc... 
+
+--- \\
+
+
+% Guia Programa Mat 3ero Informatica : 
+% - Definir límite finito e infinito.
+% - Conocer los teoremas de límites: unicidad, conservación del signo, limite
+%    de la función comprendida y limite de la función compuesta.
+% - Conocer las operaciones con límites: suma, producto, cociente, potencia
+%    y sus casos indeterminados.
+% - Resolver ejercicios de límites.
+% - Definir funciones equivalentes y conocer sus propiedades.
+% - Utilizar las equivalencias fundamentales en la resolución de límites
+%    indeterminados.
+% - Aplicar los teoremas relativos a los infinitos e infinitésimos en la
+%    resolución de problemas.
+% - Conocer la definición de continuidad de una función en un punto y en un
+%    intervalo.
+% - Calcular límites laterales y determinar la existencia del límite de una
+%    función en un punto y su continuidad.
+% - Clasificar las discontinuidades.
+% - Definir extremos absolutos.
+% - Aplicar los teoremas de las funciones continuas en un intervalo cerrado:
+%    teoremas de: Bolzano, Darboux y Weierstrass.
+% - Conocer la demostración del teorema de Darboux
+% - Aplicar el teorema de Bolzano en la resolución de ecuaciones por el
+%    método de ábacos
+
+
+\section{ Primeras nociones de 'proximidad'.  }
+
+\subsection{ Noci\'on intuitiva de l\'imite }
+
+Supongamos la funci\'on $ f: \mathbf{R} \to \mathbf{R} $, $ f(x) = x^2 - 4 $. \\  Queremos estudiar el {\color{blue} comportamiento} de la funci\'on $f$ cuando los valores del dominio, los valores de entrada, se aproximan a $1$. Esto ultimo podr\'ia expresarse como {\color{blue} ( $ x \to 1 $ )} que se puede leer como : 
+\textit{ el valor x se aproxima hacia 1 ; x tiende hacia 1 }. \\ \\
+Para esto, lo que podemos hacer es una tabla con valores $ x | f(x) $. \\
+\begin{center}
+\begin{tabular}{ | m | m | } 
+  \hline
+  $ x $ & $ f(x) = x^2 - 4 $  \\ 
+  \hline
+  $ 0,75 $ & $f(0,75) = -3,43$  \\ 
+  \hline
+  $ 0,9 $ & $f(0,9) = -3,19  $ \\
+  \hline
+  $ 0,99 $ & $f(0,99) = -3,019  $ \\
+  \hline
+  $ 1,001 $ & $f(1,001) = -2,9979  $ \\
+  \hline
+  $ 1,01 $ & $f(1,01) = -2,9799  $ \\
+  \hline
+  $ 1,05 $ & $f(1,05) = -2,8975  $ \\
+  \hline
+\end{tabular}
+\end{center}
+Con esta tabla, podr\'iamos {\color{blue} conjeturar}, suponer, que cuando x se aproxima hacia 1, {\color{blue} ($ x \to 1$)}, la funci\'on $f(x)$ se aproxima hacia el valor de $-3$, esto lo denotamos como {\color{blue}$ f(x) \to -3 $}. \\ \\ 
+Decimos entonces que la funci\'on tiene l\'imite -3 cuando x tiende hacia 1. 
+
+\begin{center}
+$ \displaystyle \lim_{x \to 1} f(x) = -3  $
+\end{center}
+
+\subsection{ Distancia entre dos puntos en $\mathbf{R}$ }
+
+Tengamos ahora una funci\'on real,  $ f(x) = 2x - 2 $ y conjeturemos el l\'imite de $f(x)$, cuando x tiende hacia 0. $( x \to 0 )$ \\ \\
+Por el momento, podemos realizar una tabla de valores, como en la parte anterior, y estudiar el comportamiento de $f(x)$, cuando $x \to 0$\\ \\
+Al realizar este estudio podr\'iamos decir que {\color{blue} $f(x) \to -2$ {\color{black}cuando} $x \to 0 $}\\ \\
+{\color{magenta} Ejercicio : Realizar la tabla de valores y verificar la conjetura del L\'imite de $f(x)$ }\\ \\ 
+Una pregunta que surge, {\color{blue}¿ Que tan pr\'oximo est\'a f(x) de -2 ?} \\ \\
+Esto depende de cuanto queramos que sea esa proximidad. Pero para eso, debemos tener una idea de 'medida' en los numeros reales, o mejor dicho, una noci\'on de distancia entre dos puntos. \\
+\begin{center}
+    Dado dos puntos, $a,b \in \mathbf{R}$ se define la distancia entre a,b como: $d(a,b) = | a - b |$
+\end{center}
+Supongamos el caso en que deseamos que $f(x)$ diste de -2 {\textit{(su l\'imite)} menos que 1 unidad. Esto es, {\color{blue} $ | f(x) - (-2) | < 1 $} \\ \\ 
+Pasamos al desarrollo de cuentas : 
+\begin{center}
+    $ | f(x) - (-2) | < 1$ \\ \hfill
+    
+    $ | (2x - 2) - (-2) | < 1$\\ \hfill
+
+    $ | 2x - 2 + 2 | < 1$ \\ \hfill
+
+    $ | 2x | < 1$ \\ \hfill
+
+    $ 2| x | < 1$ \\ \hfill
+
+    $ | x | <  \frac{1}{2} $ \\ \hfill
+
+   {\color{green} $ | x - 0 | <  \frac{1}{2} $ }\\ \hfill
+
+    
+\end{center}
+
+Que interpretar de esto? Recordemos que conjeturamos el l\'imite de f(x) cuando x se aproxima hacia 0. Dicho l\'imite es -2. \\ \\ Lo que procuramos es, aquellos valores de $x$ que permiten que $f(x)$ este a menos de 1 unidad del l\'imite -2.\\
+
+Mejor dicho, cuando la distancia entre $x$ y $0$ sea menor que $\frac{1}{2}$, \\
+{\color{blue} $| x - 0 | < \frac{1}{2} $}, la funci\'on $f(x)$ estar\'a pr\'oxima a -2, tal distancia entre f(x) y -2 es menor a 1 unidad, {\color{blue}$| f(x) - (-2) | < 1 $} \\ \\ 
+
+Otra cuesti\'on ... Si ahora quiero que f(x) diste de -2, un valor menor que 0,05 unidades. {\color{magenta}¿ Que distancia debe estar x de 0 para que f(x) diste de -2, menos de 0,05 unidades ?  
+} \\ \\
+Respuesta : $| x - 0 | < 0,025$ \\
+
+\textit{{\color{magenta} Investigar y confirmar estos resultados con la tabla de valores $x|f(x)$. }}
+ 
+\section{ Definiciones formales }
+\subsection{Definici\'on de l\'imite}
+Siguiendo con la funci\'on y ejemplo anterior, vimos que si deseamos que la distancia de $f(x)$ a su l\'imite $L$ sea menor que 1 unidad, tenemos que x debe estar a una distancia de 0, menor que $1/2$. Esto lo podemos hacer con cualquier valor positivo, \textit{tan peque\~no cuanto quieramos}. La distancia de mi funci\'on $f(x)$ a su l\'imite $L$ tan \textit{pr\'oxima}. Esto si, suponiendo que este l\'imite existe. Pasamos entonces a la definici\'on formal: 
+
+\begin{center}
+    La funci\'on $f(x)$ tiene l\'imite $L$ cuando $x$ tiende hacia un valor $a$ si, \\ 
+    {\color{blue} $ \forall \epsilon >0, ~ \exists \delta >0 : |x-a|<\delta \implies |f(x) - L|< \epsilon $ }
+\end{center}
+Esta es la conocida definici\'on $\epsilon-\delta$ \textit{(epsilon-delta)} de L\'imite de una funci\'on en un punto.\\ \\
+{\color{green}\textbf{Ejemplo:} Probar que $ \displaystyle \lim_{x \to 0} 2x - 2 = -2 $ } \\ \\ 
+Para esto trataremos de encontrar un $\delta$ en funci\'on de $\epsilon$ tal que se cumpla lo de la definici\'on. 
+\begin{center}
+    {\color{blue}$ |f(x) - L | < \epsilon $} ~ en este caso, $ | (2x - 2) - (-2) | < \epsilon $, con $\epsilon>0 $ \\ \hfill
+    
+    $ | 2x | < \epsilon $, que lo puedo expresar como, $|2(x-0)| < \epsilon $\\ \hfill
+
+    $ 2{\color{blue}|x-0|} < \epsilon $, por \'ultimo, {\color{blue}$|x-0| < \frac{\epsilon}{2}$} \\ \hfill
+
+    Defino entonces {\color{blue}$\delta = \frac{\epsilon}{2}$}, tal que se cumple lo expresado en la  definici\'on.
+\end{center}
+Esto es, cuando la distancia de cualquier punto $x$ a 0, sea menor que $\epsilon/2$, $f(x)$ estar\'a tan pr\'oxima a su l\'imite, a una distancia menor que $\epsilon$, sea este valor el que se quiera, tan peque\~no, pero mayor a cero ($\epsilon > 0$). 
+\subsection{Operaciones con L\'imites}
+Sea $\displaystyle \lim_{ x\to a} f(x) = L $, $\displaystyle \lim_{ x\to a} g(x) = M $ 
+\begin{center}
+\begin{tabular}{ | m | m | } 
+  \hline
+  $\displaystyle \lim_{ x\to a} ( f(x) \pm g(x) ) $ & $ L \pm M  $  \\ 
+  \hline
+  $\displaystyle \lim_{ x\to a}  f(x)g(x)  $ & $LM$  \\ 
+  \hline
+  $\displaystyle \lim_{ x\to a} kf(x)  $ & $kL$ ~ siendo $k \in R$ \\
+  \hline
+  $\displaystyle \lim_{ x\to a} \frac{f(x)}{g(x)}$ ~ con $g(x) \neq 0 $ & $\frac{L}{M}  $ \\
+  \hline
+  $\displaystyle \lim_{ x\to a} \sqrt{f(x)} $ & $\sqrt{L} $ \\
+  \hline
+  $\displaystyle \lim_{ x\to a} ( f(x) )^n $ & $L^n $ \\  \hline
+  
+\end{tabular}
+\end{center}
+{\color{green} \textbf{Ejemplo:} Si $\displaystyle \lim_{ x\to -2} f(x) = 1 $, $\displaystyle \lim_{ x\to -2} g(x) = -1 $, ~ esto es, $L=1$, $M=-1$  } \\ \\
+a) $\displaystyle \lim_{ x\to a} ( f(x) + 5g(x) ) = -4$ \\ \\
+b) $\displaystyle \lim_{ x\to a}  f(x)g(x) = -1 $ \\ \\
+c) $\displaystyle \lim_{ x\to a} \frac{f(x)}{g(x)} = -1 $\\ \\ 
+{\color{magenta} Compruebe y explique que propiedades utiliz\'o para el c\'alculo de los l\'imites.} \\ \\
+---\\ \\
+\textbf{C\'alculo de l\'imites, primeros casos indeterminados $\frac{0}{0}$ }\\ \\
+Supongamos que tenemos una funci\'on $f(x) = x^2 + 3x - 5$ y queremos saber su l\'imite cuando x tiende hacia 3\\ 
+Lo que podemos hacer es de cierta forma {\color{magenta}'evaluar'} la funci\'on en ese punto, cuidado por que la $f(x)$ no necesita estar definida en ese punto para calcular el l\'imite. \\ \\
+$ \displaystyle \lim_{x\to3} ~ x^2 + 3x - 5 = (3)^2 +3(3) - 5 ~=~ 13  $ \\ \\
+Decimos que el l\'imite de la funci\'on $f(x)$ es 13 cuando $x \to 3$ \\ \\ 
+En general, una 'estrategia' para el c\'alculo de l\'imites es evaluar la funci\'on en el punto de tendencia y estudiar el resultado. \\ \\ 
+Supongamos ahora que queremos c\'alcular el l\'imite, { \color{blue} $\displaystyle \lim_{ x\to 3} \frac{x^2-9}{x-3} $} \\ \\
+Esta funci\'on No esta definida cuando $ x=3 $ ya que su denominador es nulo cuando x vale 3.\\ 
+Por ende tenemos que, {\color{blue} $\displaystyle \lim_{ x\to 3} \frac{x^2-9}{x-3} = \frac{0}{0}$ } \\ \\ 
+En este caso decimos que el \textit{l\'imite es indeterminado}. Existen otros tipos de indeterminados, que ya veremos. Cuando esto sucede, hay distintas estrategias a seguir para tratar de resolver esa indeterminaci\'on. \\ \\
+En este caso, basta con un poco de \'algebra para resolver el problema.\\ 
+\begin{center}
+    Primero veamos que {\color{blue} $x^2 - 9 = (x-3)(x+3)$} \\ \hfill
+    
+    por ende, se puede escribir el l\'imite como {\color{blue} $\displaystyle \lim_{ x\to 3} \frac{(x-3)(x+3)}{x-3} $ } \\ \hfill 
+
+    Si evaluamos el l\'imite seguir\'a indeterminado, pero este l\'imite se puede simplificar, cancelando los terminos $(x-3)$ que estan en el numerador y en el denominador.\\ \hfill
+
+    {\color{blue} $\displaystyle \lim_{ x\to 3} \frac{(x-3)(x+3)}{x-3} = \lim_{ x\to 3} x + 3 = 6 $ } \\ \hfill 
+
+    por ende, {\color{blue} $\displaystyle \lim_{ x\to 3} \frac{x^2-9}{x-3} = 6 $ }
+\end{center}
+\newpage
+\section{ Lista de Ejercicios - L\'imites - Aproximaciones y operaciones b\'asicas }
+
+\textbf{Ejercicio 1)  Aproximaciones } \\ \\
+Aproximar el l\'imite de las siguientes funciones utilizando una tabla de valores. Pueden ayudarse con calculadoras o distintos programas de c\'alculo. \\ \\
+a) $ \displaystyle  \lim_{x \to 0} \frac{ \sqrt{x+4} - 2 }{ x } $ \\ \\
+b) $ \displaystyle  \lim_{x \to 0} \frac{ 9^x - 5^x }{ x } $ \\ \\
+c) $ \displaystyle  \lim_{x \to 1} \frac{ x^6 - 1 }{ x^{10} - 1 } $ \\ \\
+
+\textbf{ Ejercicio 2) Operaciones con l\'imites } \\ \\ 
+Teniendo que, $ \displaystyle  \lim_{x \to 2} f(x) = 4  $, $ \displaystyle  \lim_{x \to 2} g(x) = -2  $. Resolver \\ \\ 
+a) $ \displaystyle  \lim_{x \to 2} ( f(x) + 5g(x) )  $ \\ \\ 
+b) $ \displaystyle  \lim_{x \to 2} \sqrt{ f(x) }  $ \\ 
+
+\textbf{ Ejercicio 3) Prueba de l\'imite utilizando la definici\'on } \\ \\
+Probar que $ \displaystyle  \lim_{x \to 10}  3 - \frac{4}{5}x = -5 $ \\ 
+
+\textbf{ Ejercicio 4) C\'alculo de l\'imites } \\ \\ 
+a) $ \displaystyle  \lim_{x \to 5} \frac{x^2 - 6x + 5}{x-5} $ \\ \\ 
+b) $ \displaystyle  \lim_{x \to 2} \frac{x+2}{x^3 + 8}  $ \\ 
+
+\textbf{ Ejercicio 5) Investigar } \\ \\ 
+Dado el siguiente l\'imite, discutir sobre su valor. \\ 
+a) $ \displaystyle  \lim_{x \to 5} \frac{x^2 - 5x + 6}{x-5} $ \\ 
+b) $ \displaystyle  \lim_{x \to 0} \frac{1}{x^2}  $
+
+\section{Limites laterales, Limite infinito}
+
+Cuando queremos saber el L\'imite de una funci\'on cuando los valores de {\color{blue} $x$} tienden hacia un valor {\color{blue} $a$ }, lo que hacemos es 'aproximarnos' del punto {\color{blue} $a$}, tomando valores menores y mayores  que este, muy pr\'oximos al valor mismo de {\color{blue} $a$}. Esto es, si tengo el caso en que {\color{blue} $x \to 2$ } entonces puedo tomar los siguientes valores que se aproximan hacia 2 : 
+
+\begin{center}
+    $ 1,80 ~|~ 1,90 ~|~ 1,99 ~|~ 1,9999 ~|~ 2,0001 ~|~ 2,001 ~|~ 2,01 ~|~ 2,05 $    
+\end{center}
+Supongamos que ahora quiero estudiar el caso, cuando me aproximo hacia 2, pero con aquellos valores mayores a 2. En este caso decimos que me aproximo hacia 2 {\color{blue} por la derecha } y lo denotamos {\color{blue} $x\to 2^+$}\\ \\
+Estos valores podr\'ian ser : $ 2,0001 ~|~ 2,001 ~|~ 2,01 ~|~ 2,05 $ \\ \\     
+Caso an\'alogo para aproximarme con valores menores a 2. Decimos que me aproximo hacia 2, por {\color{blue} la izquieda} y lo denotamos {\color{blue} $x\to 2^-$} \\ \\
+\textbf{Definici\'on de L\'imites laterales} \\ \\ 
+El L\'imite de la funci\'on {\color{blue} $f(x)$} cuando $\color{blue} x $ tiende hacia {\color{blue} a} por la derecha existe y es igual a {\color{blue} $L$}, {\color{blue}$ \displaystyle \lim_{x \to a^+} f(x) = L  $} ~ si tenemos que, 
+\begin{center}
+    {\color{blue} $ \forall \epsilon > 0, \exists \delta >0 ~:~ a < x < a + \delta  \implies | f(x) - L | < \epsilon $}
+\end{center}
+{\color{magenta} Ejercicio : Escribir la definici\'on de L\'imite de $f(x)$ cuando $x$ tiende hacia el punto $a$, por la izquierda;  $ \displaystyle \lim_{x \to a^-} f(x) = L  $ } \\ \\
+{\color{green} \textbf{Ejemplos: } } \\ \\ 
+a) Calcular el l\'imite por derecha e izquierda (l\'imites laterales) cuando x tiende hacia 0, de la siguiente funci\'on, \\ \\
+$ 
+    f(x) = \begin{cases}
+              1 & \text{si } x \geq 0,\\
+               0 & \text{si } x < 0.
+          \end{cases}
+  $ ~ ~ $ \displaystyle \lim_{x \to 0^+} f(x) = 1 $ ~ ~ $ \displaystyle \lim_{x \to 0^-} f(x) = 0 $ \\ \\ \\
+b) Calcular l\'imites laterales, cuando x tiende hacia 1 de la siguiente funci\'on g(x), \\ \\
+$ 
+    g(x) = \begin{cases}
+              x^2 & \text{si } x \neq 1,\\
+               2 & \text{si } x = 0.
+          \end{cases}
+  $ ~ ~ $ \displaystyle \lim_{x \to 1^+} g(x) = 1 $ ~ ~ $ \displaystyle \lim_{x \to 1^-} g(x) = 1 $ \\ \\ \\
+c) Calcular $ \displaystyle \lim_{x \to -4} |x+4| $ ~ $( h(x) = |x+4| ) \to 0 $ cuando $( x \to -4)$ \\ {\color{magenta} Ejercicio: Comprobar} \\ \\
+
+{\color{magenta} Ejercicio: Calcular los l\'imites anteriores, pero teniendo en cuenta su gr\'afico. Esto es, sin c\'alculos, solamente viendo la gr\'afica de la funci\'on. } \\
+\begin{center}
+    \textbf{Concepto Importante!!!} \\ 
+    El l\'imite de una funci\'on existe, s\'i y solamente si, los l\'imites laterales existen y son ambos iguales. \\ \hfill
+    
+    {\color{blue}$ \displaystyle \lim_{x \to a} f(x) = L  $ ~sii~ $ \displaystyle \lim_{x \to a^+} f(x) = \displaystyle \lim_{x \to a^-} f(x) = L
+    $} 
+\end{center}
+\textbf{L\'imites en el infinito} \\ \\
+Tenemos del Ejercicio 5.b) de la Lista de ejercicios, que si $(x \to 0^+)$,\\ $1/x^2$ toma valores muy grandes, lo mismo sucede cuando $(x \to 0^-)$ \\
+En este caso decimos que {\color{blue} ($ f(x) = 1/x^2 \to \infty $) }, la funci\'on tiende hacia el infinito. \\
+
+{\color{magenta} Ejercicio: Investigar que pasa con $log(x)$ cuando $x\to 0^+$} 
+
+\begin{center}
+    \textbf{Definici\'on : L\'imite infinito cuando $x\to a$} \\ \hfill
+
+    Decimos que el l\'imite de una funci\'on $f(x)$ tiende hacia el infinito, cuando $ x\to a $ si para cualquier valor $M>0$, se tiene \\ \hfill
+
+    {\color{blue} $| x-a | < \delta \implies f(x) > M $}
+\end{center}
+
+{\color{magenta} Ejercicio: Completar la definici\'on cuando $( f(x) \to -\infty )$} \\ \\ 
+Usamos la notaci\'on {\color{blue}$ \displaystyle \lim_{x \to a} f(x) = \infty $} En estos casos se dice tambi\'en que la \textit{funci\'on $f(x)$ es un infinito en cierto punto $a$. }
+
+
+\newpage
+\section{ Lista de Ejercicios: C\'alculo de L\'imites, L\'imite infinito }
+\textbf{ Ejercicio 6) C\'alculo de l\'imites - 2da parte } \\ \\
+a) $ \displaystyle  \lim_{x \to 3} \frac{ 2x^3 + 2x^2 -16x -24 }{ x - 3} $ \\ \\
+b) $ \displaystyle  \lim_{x \to 0} \frac{ \sqrt{x+4} - 2 }{ x } $ \\ \\
+c) $ 
+    f(x) = \begin{cases}
+              2x + 10 & \text{si } x \leq -2,\\
+               -4x + x & \text{si } x > -2.
+          \end{cases}
+  $ ~ Hallar el l\'imite de $f(x)$, cuando $ x \to -2 $ \\ \\
+d) $ \displaystyle  \lim_{x \to 3} \frac{ |x-3| }{ x-3 } $ \\ \\ 
+e) $ \displaystyle  \lim_{x \to 1} \frac{ x^2 - 1 }{ \sqrt{x}-1 } $ \\ \\
+\textbf{ Ejercicio 7) }\\ \\
+Calcular los siguientes l\'imites \\ \\ 
+a) $ \displaystyle \lim_{x \to 3^+} log(x-3)  $ \\ \\
+b) $ \displaystyle \lim_{ x \to 1^+} \frac{1}{x^2 - 1} $ \\ \\
+c) $ \displaystyle \lim_{ x \to -1^-} \frac{1}{x^2 - 1} $ \\ \\
+d) $ \displaystyle \lim_{ x \to -2^+} \frac{log(x+2)}{3} $ \\ \\
+
+\newpage
+\section{Infinitos, infinit\'esimos}
+
+\subsection{ L\'imites y as\'intotas }
+
+Hasta el momento, estudiamos el comportamiento de una funci\'on {\color{blue} $f(x)$} cuando la variable {\color{blue}$x$} se aproxima hacia un determinado valor {\color{blue} $a$}, ($ x \to a $).\\ \\ 
+Desde ahora, consideramos el caso en el que $x$ toma valores arbitatrios, y suficientemente grande. Lo notaremos como {\color{blue}( $ x \to \infty $ )}\\
+Tambi\'en se considera el caso an\'alogo, cuando x toma valores muy peque\~nos, o negativos, en este caso lo notamos {\color{blue}($x \to - \infty$)} \\ \\ 
+Como el caso anterior diremos que la funci\'on $f(x)$ tiene l\'imite $L$ cuando la variable $x$ tiende hacia el infinito {\color{blue}( $ x \to \infty $ )} si, \\
+\begin{center}
+    {\color{blue} $\forall \epsilon > 0, \exists N : |x| > N \implies | f(x) - L | < \epsilon $ } \\ \hfill
+    
+    Notaci\'on: {\color{blue} $ \displaystyle \lim_{ x \to \infty } f(x) = L   $}
+\end{center}
+
+{\color{magenta} Ejercicio : Completar la definici\'on para cuando $( x \to - \infty )$ }\\ \\
+Comencemos estudiando el comportamiento de la funci\'on $ \displaystyle f(x) = \frac{x^2-1}{x^2+1} $ cuando $x \to \infty $ \textit{{\color{magenta} Ejercicio : Gr\'aficar la funci\'on con ayuda de alguna herramienta computacional, ej: Geogebra, Python, etc... }} \\
+\begin{center}
+    Planteo de cuentas: \\ \hfill
+    
+    $\displaystyle \lim_{x \to \infty} \frac{x^2-1}{x^2+1}  $ ~ Tendiendo que podemos escribir {\color{blue} $\displaystyle x^2 - 1 = x^2(1-\frac{1}{x^2})$} y lo mismo para $\displaystyle x^2 + 1 = x^2( 1 + \frac{1}{x^2} )$ El l\'imite lo expresamos como: \\ \hfill
+
+    $\displaystyle \lim_{x \to \infty} \frac{x^2-1}{x^2+1} = \lim_{x\to\infty} \frac{x^2(1-\frac{1}{x^2})}{x^2(1+\frac{1}{x^2})} = \lim_{x\to\infty} \frac{1-\frac{1}{x^2}}{1+\frac{1}{x^2}} $ \\ \hfill
+
+    Cuando {\color{blue} $x \to \infty $} los terminos {\color{blue}$\frac{1}{x^2}$} tienden hacia {\color{blue}$0$} \\ \hfill
+
+    Por ende, $\displaystyle \lim_{x \to \infty} \frac{x^2-1}{x^2+1} = 1 $     
+\end{center}
+
+El hecho de que $f(x)$ tiende hacia $1$ cuando $x \to \infty$ tiene un signficado gr\'afico tambi\'en. La gr\'afica de la funci\'on $f(x)$ se aproxima a la recta $y=1$ cuando x toma valores suficientemente grandes. Decimos entonces que $f(x)$ tiene una {\color{blue} As\'intota horizontal} $y=1$, cuando $x\to \infty$ \\ 
+
+\begin{center}
+    Definici\'on: Decimos que $f(x)$ tiene una {\color{blue} as\'intota horizontal, $y = L$ } cuando: \\ \hfill
+
+    $ \displaystyle \lim_{x\to\infty} f(x) = L $ ~;~ $ \displaystyle \lim_{x\to -\infty} f(x) = L $ 
+\end{center}
+
+---\\ 
+El caso en que $ \displaystyle \lim_{x\to a^+} f(x) = \infty $ ~;~ $ \displaystyle \lim_{x\to a^-} f(x) = -\infty $ decimos que en la recta $x=a$ la funci\'on $f(x)$ tiene una {\color{blue} as\'intota vertical, de ecuaci\'on $x=a$ } {\color{magenta} Ejemplo: Investigar asintota vertical de $g(x)= \frac{1}{x+2} $ cuando $ x \to -2^{\pm} $ } \\ \\
+
+\subsection{Ordenes de infinitos e infinit\'esimos }
+{\color{magenta} Ejercicio: Realizar y comparar en una tabla de valores las funciones $e^x$, $x$, $log(x)$, cuando $x\to \infty $   } \\ \\ 
+
+\begin{center}
+    \textbf{Definiciones:} Decimos que una funci\'on $f(x)$ es un {\color{blue} infinit\'esimo } cuando $x \to a$ si $ \displaystyle \lim_{x\to a} f(x) = 0 $ \\ 
+    Decimos que $f(x)$ es un {\color{blue}infinito} si $ \displaystyle \lim_{x\to a} f(x) = \infty $
+\end{center}
+
+Funciones comparables : $f$ y $g$ ambas funciones, decimos que son comparables si $ \displaystyle \lim_{x\to a} \frac{f(x)}{g(x)} $, $ \displaystyle \lim_{x\to a} \frac{g(x)}{f(x)} $  existe en los Reales o son infinitos. \\ \\ 
+\textit{{\color{red} Discutir e introducir ordenes de infinitios e infit\'esimos en clase ... }} \\ \\ 
+Decimos que dos infinit\'esimos o infinitos $f$ y $g$ son {\color{blue} equivalentes} cuando $x \to a$, y lo anotamos 
+{\color{blue} $ f(x) \sim  g(x)  $} si {\color{blue}$ \displaystyle \lim_{x\to a} \frac{f(x)}{g(x)} = 1 $} \\ 
+\begin{center}
+    Sean $f$ y $g$ infinit\'esimos o infinitos cuando $x \to a $. Supongamos que existe el l\'imite: $ \displaystyle \lim_{x\to a} \frac{f(x)}{g(x)} $ y tenemos tambi\'en que $ f(x) \sim h(x) $ \\ \hfill
+
+    entonces, {\color{blue}$ \displaystyle \lim_{x\to a} \frac{f(x)}{g(x)} =  \lim_{x\to a} \frac{h(x)}{g(x)}  $} \\ \hfill
+
+    An\'alogamente, si existe $ \displaystyle \lim_{ x\to a} f(x).g(x) $, tenemos que, \\ {\color{blue} $ \displaystyle \lim_{ x\to a} f(x).g(x) = \lim_{ x\to a} h(x).g(x) $ } \\ \hfill
+
+    
+\end{center}
+Esta herramienta es \'util a la hora de calcular l\'imites que parecen complejos pero si conocemos algunos infinitos o infinit\'esimos equivalentes puede que se simplifiquen los c\'alculos. \\ \\
+
+{\color{green} Ejemplo : } \\ \\
+Supongamos que deseamos calcular el l\'imite {\color{blue}$ \displaystyle \lim_{ x \to 0 } \frac{e^{x} - 1}{x} $} \\ 
+Si hacemos tender x hacia 0, llegamos a una indeterminaci\'on del tipo 0/0. \\
+Si bien hay distintas herramientas para resolver casos indeterminados, este caso ya es un tanto m\'as complejo que los anteriores. \\ \\ La idea en este caso es tratar de usar {\color{blue} equivalentes} para resolver dicho l\'imite. \\
+Por un lado, tenemos la equivalencia {\color{blue}$ e^{x} - 1 \sim x $} cuando {\color{blue}$x \to 0$} \\ 
+
+Entonces, este l\'imite puede expresarse como, \\
+\begin{center}
+    {\color{blue}$ \displaystyle \lim_{ x \to 0 } \frac{e^{x} - 1}{x} =  \lim_{ x \to 0 } \frac{x}{x} = 1$ }  \\ \hfill
+
+    
+\end{center}
+Claro que este l\'imite se pudo resolver gracias a que ya se conoc\'ia la equivalencia $ e^{x} - 1 \sim x $ cuando x tiende hacia 0. Una idea de esta equivalencia se podr\'ia entender cuando se estudia Derivadas y aproximaciones de funciones por polinomios \textit{(ej: Desarrollo de Taylor)}. \\ \\ 
+Suele ser \'util recurrir a una Tabla de infinit\'esimos equivalentes e infinitos equivalentes, para trabajar con algunos l\'imites. Existen equivalencias b\'asicas, como la  usada en este ejemplo. \\ \\ 
+\textit{{\color{magenta} Podr\'ia estudiarse el comportamiento de la funci\'on $f(x) = e^{x} - 1$ en un entorno del 0 de un modo gr\'afico y comparar con la funci\'on $g(x) = x $ en tal entorno. }}
+
+
+\newpage
+\section{Lista de Ejercicios - Infinitos y 
+As\'intotas}
+\textbf{Ejercicio 8) Infinitos y as\'intotas } \\
+Calcular y hallar, si existen, los l\'imites y as\'intotas siguientes \\ \\ 
+a)$ \displaystyle \lim_{x \to \infty} \frac{x^3 + 6x^2-x+8}{x^2+5x-1}  $ \\ \\ 
+b)$ \displaystyle \lim_{x \to \infty} \frac{5x^2 + 25}{10x^3+7x^2+x}$ \\ \\
+c)$ \displaystyle \lim_{x \to -\infty} \frac{1 + x^6}{ x^4 + 1} $ \\ \\ 
+d)$ \displaystyle \lim_{x \to \infty} \sqrt{9x^2+x} -x $ \\ \\
+\textbf{Ejercicio 9) Ordenes, infinit\'esimos }\\ 
+a) Investigar sobre infinit\'esimos e infinitos equivalentes b\'asicos. \textit{(La idea es conocer algunos equivalentes b\'asicos para trabajar despu\'es con l\'imites.)} \\ \\ 
+b) A partir de los equivalentes conocidos en la parte a), calcular los siguientes l\'imites: \\
+
+1) $ \displaystyle \lim_{x \to 0} \frac{sin(x)(x+1)}{e^{x}-1} $ \\
+
+2) $ \displaystyle \lim_{x \to 0} \frac{1-cos(x)}{x^2} $ \\
+
+3) $ \displaystyle \lim_{x \to 0} \frac{x^2}{log(1+x)} $ \\
+
+\newpage
+
+\section{Continuidad}
+Cuando estamos calculando l\'imites de una funci\'on $f(x)$, estudiamos el comportamiento de esa funci\'on cuando $x$ se aproxima a cierto valor $a$, esto es, $x \to a$. No interesa, para nuestra definici\'on de l\'imite ni para nuestro estudio, cual es el valor de la funci\'on en el punto $a$, esto es, la imagen del punto $a$, $f(a)$. La funci\'on puede que No este definida en ese punto. \\ \\
+Supongamos ahora el caso en que Si interesa tener en cuenta este valor, la imagen de $a$, $f(a)$, cuando estamos calculando el l\'imite de una funci\'on $f(x)$. Con esto queremos decir la siguiente definici\'on, \\
+\begin{center}
+    Decimos que una funci\'on $f$ es {\color{blue}continua} en el punto $a$ cuando, \\ \hfill
+
+    {\color{blue}$ \displaystyle \lim_{x \to a} f(x) = f(a)  $} \\ \hfill
+
+    Definici\'on formal: \\ \hfill
+
+    $\forall \epsilon > 0, \exists \delta > 0 : |x-a|<\delta ~ \implies ~ |f(x) - f(a)|< \epsilon  $
+\end{center}
+
+Una funci\'on que es continua en todos sus puntos, se dice continua. \\
+Cabe destacar en la definici\'on que para que cierto l\'imite exista entonces sus l\'imites laterales deben ser iguales, esto es l\'imite cuando $x \to a^+$, $x \to a^-$, estos l\'imites iguales al valor $f(a)$. \\ \\ 
+Un ejemplo b\'asico de funciones continuas son las funciones polin\'omicas, ejemplo de estas, $f(x) = x^3 + 2x - 1$. \\ \\ 
+{\color{magenta} Ejercicios: 
+Probar que las siguientes funciones son continuas en los puntos determinados. } \\ \\ 
+1) $\displaystyle f(x) = \frac{1}{e^{2x}}$,  $x=2$ \\ \\
+2) $g(x) = 2x + 1 - log(x) $, $x=5$ \\ \\ 
+\textbf{Puntos en donde la funci\'on No es continua} \\ 
+En algunos casos, suele ser de interes saber en donde una funci\'on No es continua, {\color{blue}(discontinua)}. Estos puntos pueden ser en donde la funci\'on No esta definida. 
+\newpage
+{\color{green} Ejemplos : } \\ \\ 
+Supongamos como primer caso la funci\'on $ \displaystyle f(x)= \frac{x^2-x-2}{x-2}$ \\ \\ 
+esta funci\'on No esta definida cuando $x = 2$, por ende no existe $f(2)$. Por lo tanto esta funci\'on No es continua en $x=2$. \\ \\ 
+Otro ejemplo, sea la funci\'on $ \displaystyle
+    g(x) = \begin{cases}
+              \frac{1}{x^2} & \text{si } x \neq 0,\\
+               1 & \text{si } x = 0.
+          \end{cases}
+  $ \\ \\ 
+Para saber si $g(x)$ es continua en $x=0$ lo que podemos hacer es calcular los l\'imites laterales de $g(x)$ cuando $x \to 0^{-}$, $x \to 0^{+}$ \\ \\ 
+Ya sabemos por \textit{ejercicio 5.b)} que $\displaystyle \lim_{x \to 0^{+}} f(x) = \infty $. Lo mismo para el caso en que $x \to 0^{-}$. Tenemos que el L\'imite no existe cuando $x \to 0$. Por m\'as que $f(0) = 1$, tenemos que la funci\'on $g(x)$ No es continua en $x = 0$  \\ \\ 
+
+{\color{magenta} Ejercicio: Discutir continuidad de la funci\'on $g(x) = | x - 4 |$ en $x = 4$. Graficar la funci\'on } \\ 
+
+\begin{center}
+    \textbf{Definiciones} \\ 
+    Decimos que una funci\'on $f(x)$ es {\color{blue}continua por la derecha} de un punto $x=a$ si, \\ \hfill
+
+    {\color{blue} $\displaystyle \lim_{x \to a^{+}} f(x) = f(a) $} \\ \hfill
+    
+    Caso an\'alogo para continuidad por la izquierda. \\ \hfill
+
+    Decimos que una funci\'on $f(x)$ es {\color{blue} continua sobre un intervalo} si es continua en cada uno de sus puntos en tal intervalo  
+    
+\end{center}
+
+\newpage
+
+\section{Lista de ejercicios: Continuidad }
+\textbf{Ejercicio 10)} \\
+Estudiar la continuidad de las siguientes funciones en los puntos determinados.  \\ \\
+a) $\displaystyle f(x) = \frac{1}{x+2} $ ~ ~ en $x = -2 $ \\ \\ 
+b) $ g(x) = \begin{cases}
+              e^x & \text{si } x < 0,\\
+               x^2 & \text{si } x \geq 0.
+          \end{cases} $ ~ ~ en $x=0$ \\ \\
+c) $ h(x) = \begin{cases}
+              cos(x) & \text{si } x < 0,\\
+               0 & \text{si } x = 0,\\
+               1-x^2 & \text{si } x > 0.
+          \end{cases} $ ~ ~ en $x=0$ \\ \\
+d) $ \displaystyle i(x) = \frac{2x^2 - x - 1}{x^2 + 1} $ ~ ~ en $x=-1$ \\ \\ 
+\textbf{Ejercicio 11)} \\ 
+Probar si las siguientes funciones son continuas en sus intervalos determinados, \\ \\ 
+a) $ \displaystyle f(x) = \frac{2x + 3}{x-2} $ ~ ~ $I = ( 2, \infty )$ \\ \\
+b) $ \displaystyle g(x) = 5\sqrt{3-x} $ ~ ~ $I=(-\infty,3)$ \\ \\
+\textbf{Ejercicio 12) } \\ 
+Encontrar los valores de ciertos par\'ametros para que la funci\'on sea continua. \\ \\
+a) $ f(x) = \begin{cases}
+              log(x+1) & \text{si } x > 0,\\
+               (x+m)^2 & \text{si } x \leq 0.
+          \end{cases} $ ~ ~ en $x=0$\\ \\ \\
+b) $ g(x) = \begin{cases}
+              x^2 + 3x + 2 & \text{si } x \leq 1,\\
+               mx^2 + nx +1 & \text{si } x > 1.
+          \end{cases} $ ~ ~ en $x=1$  
+
+\newpage
+
+\section{Teoremas de funciones continuas} 
+{ \color{red} En construcci\'on ... } 
+
+\newpage 
+
+\section{Lista de ejercicios - Teoremas de funciones continuas }
+\textbf{Ejercicio 12)} \\
+{ \color{red} En construcci\'on ... }
+% --- 
+\newpage
+
+\section{ Referencia bibliogr\'afica }
+
+\begin{itemize}
+    \item James Stewart - C\'alculo de una variable. Trascendentes tempranas 7ma Ed. 
+    \item  Stewart et al (2012). Prec\'alculo. Matem\'aticas para el c\'alculo 6ta Ed.
+    
+\end{itemize}
+
+---
+
+\section{ Apendice A: Ejercicios de \'algebra. Operaciones b\'asicas.   }
+    
+\textbf{ Ejercicio 1) } 
+Resolver las siguientes operaciones: \\ \\
+a) $ (x-1)^3 - (x+2)^2 $ \\ \\
+b) $  \displaystyle  \frac{x^2 + 3x + 2}{ x^2 - x - 2 } $ \\ \\
+c) $  \displaystyle  \frac{x^2}{ x^2 - 4 } - \frac{x+1}{x+2} $ \\ 
+
+\textbf{ Ejercicio 2) } \\ \\
+Resuelva : \\ \\
+a) $ 3(x+6) + 4(2x-5) $ \\ \\
+b) $ (2x + 3)^2 $ \\
+
+\textbf{ Ejercicio 3) } \\ \\
+Realizar un tabla de valores de las siguientes funciones: \textit{(por ejemplo, pruebe con valores del intervalo (-2,2) ) } \\ \\
+a) $ f(x) = 2x + 4 $ \\
+b) $ g(x) = e^{-2x} $ \\
+c) $ \displaystyle h(x) = \frac{1}{x-1} $ \\
+d) $ i(x) = log( x + 10) $ \\ 
+
+\textbf{ Ejercicio 4) } \\ \\
+Comportamiento de una funci\'on $f(x)$ cuando $x$ se aproxima hacia un determinado valor. \\
+
+a) $ f(x) = 2x + 5 $ ; cuando $x$ se aproxima hacia $2$ \\ 
+Esto ultimo lo podemos escribir como  $( x \to 2 )$. - se dice $x$ tiende a 2 -  
+
+
+
+
+
+\section{ Apendice B: Funciones por partes, valor absoluto y distancia }
+
+\textbf{Ejercicio 1) Desigualdades con valor absoluto y distancias} \\ \\ 
+a) $ | x - 2 | < 5 $ \\ \\
+b) $ | 2x + 7 | \leq 2 $ \\ \\
+c) $ | x - 2 | > | x + 2 | $ \\ \\
+d) $ | 3x + 3 | < | 4( x + 1 ) | $ \\ \\
+\textbf{Ejercicio 2) Funciones por partes} \\ \\
+Graficar las siguientes funciones.  \\ \\
+a) $ f(x) = | 2x + 4 | $ \\ \\
+b) $ 
+    g(x) = \begin{cases}
+              1 & \text{si } x \geq 0,\\
+               0 & \text{si } x < 0.
+          \end{cases}
+  $ \\ \\ \\
+c) $ 
+    h(x) = \begin{cases}
+              x^2 & \text{si } x \neq 1,\\
+               2 & \text{si } x = 1
+          \end{cases}
+  $ \\ \\ \\
+d) $ i(x) = | x + 4 | $ \\ \\ 
+
+
+ 
+\end{document}
